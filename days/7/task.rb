@@ -59,5 +59,7 @@ def calc_bags_for_color(color, counter = 0)
   [counter, inside, itself].sum
 end
 
-puts COLOR_MAPPING.values.count { |node| node.descriptions.any? { |desc| contain_color?(desc.name) } }
-puts calc_bags_for_color(SUITABLE_COLOR)
+puzzle1 = COLOR_MAPPING.values.count { |node| node.descriptions.any? { |desc| contain_color?(desc.name) } }
+puzzle2 = calc_bags_for_color(SUITABLE_COLOR)
+
+puts [puzzle1, puzzle2]
