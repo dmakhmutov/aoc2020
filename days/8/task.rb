@@ -2,19 +2,19 @@ require "pry"
 
 MULTIPLE_INSTRUCTIONS = []
 INSTRUCTIONS = File.read(File.expand_path("input.txt"))
-                   .split("\n")
-                   .map { _1.split(" ") }
-                   .map { [_1, _2.to_i] }
+  .split("\n")
+  .map { _1.split(" ") }
+  .map { [_1, _2.to_i] }
 
-def puzzle_run(instruction_position: 0, steps_done: {}, acc: 0, instructions:)
+def puzzle_run(instructions:, instruction_position: 0, steps_done: {}, acc: 0)
   command, num = instructions[instruction_position]
 
-  return [acc, "End of cycle"] if command == nil
+  return [acc, "End of cycle"] if command.nil?
   return [acc, "Before exec second time"] if steps_done[instruction_position] == true
   steps_done[instruction_position] = true
 
   case command
-  when "nop" then
+  when "nop"
     puzzle_run(instruction_position: instruction_position + 1, acc: acc, steps_done: steps_done, instructions: instructions)
   when "acc"
     acc += num
@@ -28,11 +28,11 @@ def generate_combinations
   INSTRUCTIONS.each.with_index do |(command, num), index|
     new_command =
       case command
-      when "nop" then
+      when "nop"
         "jmp"
-      when "jmp" then
+      when "jmp"
         "nop"
-      when "acc" then
+      when "acc"
         "acc"
       end
 
